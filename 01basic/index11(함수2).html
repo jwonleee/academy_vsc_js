@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        //1st
+        // function func1() {
+        // }
+        // var a = func1;
+        
+        //a 변수에 함수 자체를 통째로 저장, 호출이랑 다름
+        var a = function() {
+            console.log('a함수');
+        }
+        
+        //익명함수는 반드시 선언부 아래에서 호출
+        a();
+        
+        //매개변수 2개인 익명함수 이면서 return 값 있음
+        var b = function(x, y) {
+            return x + y;
+        }
+        console.log(b(3, 5)); //8
+        var result = b(1, 2);
+        console.log('b함수:',result); //3
+
+        console.log('-------------------------------------------------------');
+
+        //익명함수로 변경해보기
+        function method1(x) {
+            if(x % 2 == 0) {
+                return '짝수';
+            } else {
+                return '홀수';
+            }
+        }
+
+        // var c = function(x) {
+        //     if(x % 2 == 0) {
+        //         return '짝수';
+        //     } else {
+        //         return '홀수';
+        //     }
+        // }
+        var c = function(x) { //3항 연산자도 가능
+            return x % 2 == 0 ? '짝수' : '홀수';
+        }
+
+        var result = c(1);
+        console.log(result); //리턴 o
+        var result2 = c(2);
+        console.log(result2);
+
+        //매개변수를 3개 받아서 평균을 반환하는 익명함수를 선언
+        var d = function(x, y, z) {
+            return (x + y + z)/3;
+        }
+
+        var result = d(1, 2, 3);
+        console.log(result);
+
+        console.log('--------------------------------------------------------'); //세미콜론 중요합니다
+
+        //즉시실행 함수
+        //return 활용 불가
+        (function(x, y, z) {
+            console.log("즉시실행:", x + y + z);
+        })(1, 2, 3); //나 자신을 호출하겠다, 매개변수를 넣으면 이렇게 실행해도 됨
+
+    </script>
+
+</body>
+</html>

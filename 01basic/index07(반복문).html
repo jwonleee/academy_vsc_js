@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+        //while문
+        // var a = 1;
+        // while(a <= 10) {
+        //     console.log(a);
+        //     a++;
+        // }
+
+        //for문
+        // for(var a = 1; a <= 10; a++) {
+        //     console.log(a);
+        // }
+
+        //배열과 for문
+        // var arr = [1, 2, 3, 4, 5];
+        // for(var i = 0; i < arr.length; i++) {
+        //     console.log( arr[i] ); //배열의 요소값 찍기
+        // }
+
+        //빈 배열을 하나 생성하고, 1~10까지 값을 반복문으로 추가
+        var arr = new Array();
+        
+        for(var i = 1; i <= 10; i++) { //push 사용
+            arr.push(i);
+        }
+        console.log(arr);
+
+        for(var i = 0; i < 10; i++) { //자바 기본문법 사용
+            arr[i] = i+1;
+        }
+        console.log(arr);
+
+        //구구단 2~9단 출력
+        for(var i = 2; i <= 9; i++) {
+            console.log(i + '단');
+            for(var j = 1; j <= 9; j++) {
+                console.log(i + 'X' + j + '=' + i*j);
+            }
+        }
+
+    </script>
+
+</body>
+</html>

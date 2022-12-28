@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        //클로저 - ?
+        //lexical scoping(렉시칼 스코프) - 함수의 선언 위치에 따라서 상위 스코프를 결정하게 된다.
+        
+        
+        var a = 1;
+        function x() {
+            a = 10;
+            console.log(a); //
+        }
+        x();
+        // console.log(x); 이렇게 안해도 된다....
+
+        //비교 1
+        var b = 1;
+        function y() {
+            var b = 10; 
+            z();
+        }
+        function z() {
+            console.log(b);
+        } //1
+
+         //비교 2
+        var b = 1;
+        function y() {
+            var b = 10; 
+            z();
+            function z() {
+                console.log(b);
+            }
+        } //10
+
+        
+        y(); //실행
+        
+
+        //클로저 - 내부함수를 이용해서 외부함수(a)의 변수의 접근할 수 있는 환경을 만들어준다.
+        function func1() { //함수 안에
+            var a = 1; //지역변수
+
+            //1st
+            // var b = function(){ //var a와 var b의 스코프가 동일하기 때문에 b에서 a사용 가능
+            //     return a;
+            // }
+            // return b;
+
+            //2nd
+            return function() {
+                return a; //내부함수(a)
+            } //위와 같은 코드
+
+        } //a의 범위는 요기까지
+        
+        // func1(); 
+        // console.log(a); //err
+
+        var result = func1(); //result는 내부함수
+        var x = result();
+        console.log(x); //x는 a값
+
+        console.log('--------------------------------------------------------------------------');
+
+        //클로저가 아닌 상황
+        /*
+        function compute() { //선언적 함수
+            var count = 0;
+            return ++count;
+        }
+
+        console.log(compute());
+        console.log(compute());
+        */
+
+        //클로저 상황
+        function compute() {
+            var count = 0; //private 변수
+            return function () { //이 부분이 내부함수, 밖에서 result2로 들어가는 부분
+                return ++count;
+            }
+        }
+
+        var result2 = compute(); //result2는 내부함수
+        console.log(result2()); //count값에 대한 접근, 1나옴
+        console.log(result2()); //2나옴
+        console.log(result2()); //3나옴
+
+
+    </script>
+
+</body>
+</html>
