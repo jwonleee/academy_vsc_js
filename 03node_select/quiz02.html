@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <p>[ select의 value 속성은 선택된 값을 의미 ]</p>
+    <h3>change 이벤트</h3>
+
+    <div id="msg" style="font-size: 30px; font-weight: 600; margin-bottom: 20px;">단어를 선택하세요</div>
+
+    <select id="sel">
+        <option value="1">선택</option>
+        <option value="2">안녕하세요</option>
+        <option value="3">hello</option>
+        <option value="4">你好</option>
+        <option value="5">こんにちは</option>
+    </select>
+
+    <script>
+        var sel = document.getElementById("sel");
+        var msg = document.querySelector("#msg"); //http로 보내기 위한 msg 변수
+
+        sel.onchange = function () {
+            console.log(sel); //select 다 가져옴
+            
+            var a = "";
+            switch (sel.value) {
+                case "1":
+                    a = "선택하세요";
+                    break;
+                case "2":
+                    a = "한국어 입니다";
+                    break;
+                case "3":
+                    a = "영어 입니다";
+                    break;
+                case "4":
+                    a = "중국어 입니다";
+                    break;
+                default:
+                    a = "일본어 입니다";
+                    break;
+            }
+            msg.innerHTML = a;
+        }
+    </script>
+
+
+    <!-- 다른 풀이 -->
+    <!-- <select id="lang">
+        <option value="">선택</option>
+        <option value="영어">hello</option>
+        <option value="한글">안녕하세요</option>
+        <option value="중국어">你好</option>
+    </select>
+    
+    <script>
+        var lang = document.getElementById("lang");
+        var msg = document.querySelector("#msg");
+
+        lang.onchange = function() {
+            if(lang.value == "") {
+                msg.innerHTML = "단어를 선택하세요";
+            } else {
+                msg.innerHTML = lang.value + "입니다";
+            }
+        }
+
+    </script> -->
+
+
+</body>
+</html>

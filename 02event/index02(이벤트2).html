@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button id="btn">기본 이벤트</button>
+
+    <script>
+        //취득할 태그보다 아래에 있어야 함
+        var a = document.getElementById("btn");
+
+        console.log(a); //a는 태그, 결과값: <button id="btn">기본 이벤트</button>
+
+        a.onclick = function() {
+           console.log('기본이벤트');
+           console.log(this); //this는 자기자신인 태그
+           console.log(a); //this와 같이 자기자신인 태그
+        }
+    </script>
+
+</body>
+</html>

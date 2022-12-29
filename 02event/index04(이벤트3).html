@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button id="btn">표준 이벤트</button>
+
+    <script>
+        //표준이벤트 - 는 동일한 이벤트를 체이닝 = 동일한 이벤트를 여러개 사용 가능, 아래부분 표준이벤트1, 표준이벤트2 동시에 뜸
+        var btn = document.getElementById("btn");
+        btn.addEventListener('click', function() { //2nd 직접 집어넣기
+            console.log("표준이벤트1");
+
+        }); //aaa()하면 호출되서 반환을 받겠다는 이야기임, 큰일남
+
+        btn.addEventListener('click', function() { //2nd 직접 집어넣기
+            console.log("표준이벤트2");
+
+        });
+
+        //1st
+        // function aaa() {
+        //     console.log("표준이벤트");
+        // }
+
+    </script>
+
+
+</body>
+</html>
