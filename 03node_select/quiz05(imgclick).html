@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <article>
+
+        <img src="img/1.jpg" alt="이미지" width="400" style="border: 3px solid black;">
+
+        <select>
+            <option value="1.jpg">봄</option>
+            <option value="2.jpg">여름</option>
+            <option value="3.jpg">가을</option>
+            <option value="4.jpg">겨울</option>
+        </select>
+
+        <button class="btn" type="button">이미지 바꾸기</button>
+
+        <input type="color">
+        <button class="btn2">색상변경하기</button>
+
+    </article>
+
+    <script>
+        var mainimg = document.querySelector("img"); //이미지
+        var img = document.querySelector("select"); //옵션
+        var btn = document.querySelector(".btn"); //버튼
+        
+        btn.onclick = function() {
+            console.log("img.value");
+        }
+    </script>
+
+</body>
+</html>

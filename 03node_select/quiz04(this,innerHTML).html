@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h3>카운트 만들기 - this, innerHTML, value 속성을 사용하면 됩니다.</h3>
+
+    <input type="number" value="0">
+    <button onclick="calc(this)" >+</button>
+    <button onclick="calc(this)">-</button>
+    <!-- alert: 0보다 작을 수 없습니다. -->
+
+    <script>
+        var number = document.querySelector("input");
+        function calc(tag) {
+            if(tag.innerHTML == '+') { //들어온 매개변수 tag의 
+                number.value++;
+            } else if(number.value <= 0){
+                alert("0보다 작을 수 없습니다");
+            } else {
+                number.value--;
+            }
+        }
+
+    </script>
+
+
+</body>
+</html>

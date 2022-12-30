@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h3>카운트 만들기 - this, innerHTML, value 속성을 사용하면 됩니다.</h3>
+
+    <input type="number" value="0" id="num">
+    <button onclick="calc(this)" >+</button> <!-- this를 넣어서 이게 무엇인지 확인 -->
+    <button onclick="calc(this)">-</button>
+    <!-- alert: 0보다 작을 수 없습니다. -->
+
+    <script>
+        var num = document.querySelector("num");
+        function calc(x) { //x가 태그, 위에서 this로 넣어주었으니 매개변수 넣어줘야 함
+            if(x.innerHTML == '+') { //들어온 매개변수 tag의 써져있는(innerHTML) 속성 확인
+                num.value++; //num이 가지고 있는 value(초기 0) 값 하나씩 증가
+            } else {
+                if(num.value <= 0) { //num의 value가 0보다 떨어지면
+                    return; //종료
+                }
+                num.value--; //num이 가지고 있는 value(초기 0) 값 하나씩 감소
+            }
+        }
+
+    </script>
+
+
+</body>
+</html>

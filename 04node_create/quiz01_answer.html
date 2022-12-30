@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+
+        thead th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <button type="button" id="addLists">5개추가하기</button>
+    <button type="button" id="addList">1개추가하기</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>교시</th>
+                <th>훈련과목</th>
+                <th>담당자</th>
+                <th>훈련내용</th>
+            </tr>
+        </thead>
+        <tbody class="todoList">
+            <tr><!-- tr의 innerHTML안에 각 td들을 넣어 만듦 -->
+                <td><input type="text" size="3"></td>
+                <td><input type="text"></td>
+                <td><input type="text" size="5"></td>
+                <td><input type="text"></td>
+            </tr>
+            <!-- tr별로 appendChild가 들어가면 됨 -->
+        </tbody>
+    </table>
+
+
+    <script>
+        var todoList = document.querySelector(".todoList"); //todoList를 가져옴
+
+        var addList = document.getElementById("addList");
+        addList.onclick = function () {
+            //tr은 1개 td는 4개
+            createTag(); //함수호출
+        }
+
+        var addLists = addLists = document.getElementById("addLists");
+        addLists.onclick = function () { //함수 안에서 5번 호출
+            for (var i = 1; i <= 5; i++) {
+                createTag();
+            }
+        }
+
+        function createTag() { //함수로 만듦
+            var tr = document.createElement("tr"); //tr태그를 만듦
+            tr.innerHTML = '<td><input type="text" size="3"></td>' +
+                '<td><input type="text"></td>' +
+                '<td><input type="text" size="5"></td>' +
+                '<td><input type="text"></td>';
+
+            todoList.appendChild(tr);
+            // document.querySelector(".todoList").appendChild(tr); todoList를 안만들면 이렇게 하면 됨
+        }
+    </script>
+
+
+
+    <script> //짧은 코드
+        var todoList = document.querySelector(".todoList"); //todoList를 가져옴
+
+        addList.onclick = function () {
+            var tr = document.querySelector(".todoList tr"); //tr을 querySelector로 다 가져옴 → object형
+            var a = tr.cloneNode(true); //cloneNode로 node로 클론떠서 var변수로 하나 만들어줌
+            todoList.appendChild(a); //appendChild는 node형만 가지고 올 수 있음
+        }
+
+        addLists.onclick = function () {
+            for (var i = 1; i <= 5; i++) {
+                var tr = document.querySelector(".todoList tr");
+                var a = tr.cloneNode(true);
+                todoList.appendChild(a);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

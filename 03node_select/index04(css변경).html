@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h3>CSS 제어</h3>
+
+    <ul class="box">
+        <li>목록1</li>
+        <li>목록2</li>
+        <li>목록3</li>
+    </ul>
+
+    <button id="btn">css 속성 변경하기</button>
+
+    <script>
+        // li 전부 한꺼번에 바꿔주려면
+        var li = document.querySelectorAll(".box li"); //1. querySelectorAll바꿔줌
+        var btn = document.getElementById("btn");
+        btn.onclick = function() {
+            
+            for(var i = 0; i < li.length; i++) { //2.배열로 나오니까 반복문 돌림
+                li[i].style.backgroundColor = "lightblue"; //3.li의 i번째에 style 넣음
+                li[i].style.color = "red";
+            }
+
+            // li.style.backgroundColor = "lightblue"; //하이픈 → 카멜표기법으로
+            // li.style.color = "red";
+
+        }
+
+    </script>
+
+</body>
+</html>

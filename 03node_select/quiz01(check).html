@@ -65,7 +65,7 @@
     <input type="checkbox" value="3" onclick="check(this)">조항3
 
     <script>
-        function check(tag) {
+        function check(tag) {  //this 자리에 tag라는 매개변수 넣어줌, 매개변수 tag는 태그를 가리킴
             // console.log(tag);
             if(tag.checked == true) {
                 alert(tag.value + "조항 선택");

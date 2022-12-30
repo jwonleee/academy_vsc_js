@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        input:focus {
+            outline: none;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <h3>onfocus - 인풋에 focus 들어갈 때 동작, onblur - 인풋에 focus가 떠났을 때 동작</h3>
+    <input type="text" class="xx">
+    
+    <script>
+        var xx = document.querySelector(".xx");
+        xx.onfocus = function () {
+            console.log("포커스 진입");
+        }
+        
+        xx.onblur = function () {
+            console.log("포커스 아웃");
+        }
+        </script>
+
+    <hr>
+
+    <h3>onfocus, onblur 실습</h3>
+    <article>
+        아이디 <input type="text" id="id" placeholder="4자리 이상"><span class="idmsg"></span>
+        <br>
+        비밀번호 <input type="text" id="pw" placeholder="9자리 이상"><span class="pwmsg"></span>
+
+    </article>
+
+    <script>
+        var id = document.querySelector("#id"); //id 가져옴
+        var pw = document.querySelector("#pw"); //pw 가져옴
+        var idmsg = document.querySelector(".idmsg"); //idmsg 가져옴
+        var pwmsg = document.querySelector(".pwmsg"); //pwmsg 가져옴
+
+        id.onchange = function () { //내용이 변할때 (onblur와 비교)
+            if(id.value.length < 4) { //사용자가 적은 value값 가져오는데, 그 값의 길이가 4보다 작으면
+                idmsg.innerHTML = "아이디 4글자 이상이거든요?"; //idmsg에 메세지를 넣어줌
+                id.style.border = "3px solid red"; //id태그의 컬러를 바꿔줌
+            } else {
+                idmsg.innerHTML = "";
+                id.style.border = "3px solid green";
+            }
+        }
+
+        pw.onchange = function () {
+            if(pw.value.length < 9) {
+                pwmsg.innerHTML = "비밀번호 9글자 이상이거든요?";
+                pw.style.border = "3px solid red";
+            } else {
+                pwmsg.innerHTML = "";
+                pw.style.border = "3px solid green";
+            }
+        }
+
+    </script>
+
+
+</body>
+</html>

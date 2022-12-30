@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h3>todo list 만들기</h3>
+    <input type="text" class="todo" placeholder="할 일을 작성해 보세요">
+    <button class="btn">추가</button>
+    
+    <!-- 버튼 누르면 하나씩 생성 -->
+    <ul class="list">
+        <!--
+        <li>내용</li>
+        <li>내용</li>
+        <li>내용</li>
+        <li>내용</li>
+        <li>내용</li>
+        이런식으로 생성될 것임
+        -->
+    </ul>
+
+    <script>
+        var todo = document.querySelector(".todo");
+        var list = document.querySelector(".list");
+        var btn = document.querySelector(".btn");
+        
+        btn.onclick = function () {
+
+            var li = document.createElement("li"); //li태그 생성
+            // console.log(li); 순수한 태그 생성, <li></li>
+
+            var a = document.createElement("a");
+            a.href = "#"; //태그를 조립한다고 생각하면 됨
+            // console.log(a); //<a href = "#"></a>
+            a.innerHTML = todo.value; //todo에 적은 값을 a의 innerHTML에 넣음
+            
+            li.appendChild(a); //li태그의 자식으로 a태그를 넣음
+            
+            list.appendChild(li); //최종적으로 list태그(ul)의 자식으로 li를 넣음
+
+            todo.value = ""; //추가하면 value 값 없애기, 초기화
+        }
+    </script>
+
+
+
+    <hr>
+
+
+
+    <h3>addlist 만들기</h3>
+    <div id="addList">
+    </div>
+
+    <button id="add">추가</button>
+
+    <script>
+        
+        window.onload = function() { //로딩이 될 때 이미 리스트 열개는 만들어져 있음
+            var addList = document.getElementById("addList"); //id로 addList 가져옴
+            var ul = document.createElement("ul"); //ul태그는 for밖에서 한번만 만들어짐
+
+            for(var i = 1; i <= 10; i++) { //li태그는 10개 만들어짐
+                var li = document.createElement("li"); //태그를 만들고
+                li.innerHTML = "리스트" + i + "번째"; //innerHTML에 리스트i번째라고 나타내기
+                ul.appendChild(li); //ul의 자식으로 li를 하나씩 추가 함
+            }
+
+            addList.appendChild(ul); //최종적으로 ul을 addList에 넣음 = addList의 자식으로 ul을 넣음
+        
+        }
+
+        //
+
+        var add = document.getElementById("add"); //add 버튼 가져옴
+        add.onclick = function() {
+            var li = document.createElement("li");
+            li.innerHTML = "추가된 리스트";
+            
+            //새롭게 addList > li 태그를 얻음 = document.querySelector("#addList > ul");
+            //재사용할 필요가 없다면 변수를 만들어서 넣지 않고 점(.) 찍어서 사용
+            document.querySelector("#addList > ul").appendChild(li);
+        }
+
+        
+        
+    </script>
+
+</body>
+</html>
