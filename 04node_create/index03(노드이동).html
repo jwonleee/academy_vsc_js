@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        table {border-spacing: 0; border-collapse: collapse;}
+        thead th, tbody td {
+            border: 1px solid black;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <table >
+        <thead>
+            <tr>
+                <th>이동</th>
+                <th>번호</th>
+                <th>이름</th>
+                <th>내용</th>
+                <th>날짜</th>
+            </tr>
+
+        </thead>
+
+        <tbody class="table">
+        <tr> <!-- inline 이벤트로 down, up 함수 걸기 / 각자 본인에 맞는 부모에 맞춰서 구분해야 하기 때문에 this 사용 -->
+            <td><button onclick="down(this)">↓</button><button onclick="up(this)">↑</button></td>
+            <td>1</td>
+            <td>홍길자</td>
+            <td>안녕!</td>
+            <td>2019-01-01</td>
+        </tr>
+        <tr>
+            <td><button onclick="down(this)">↓</button><button onclick="up(this)">↑</button></td>
+            <td>2</td>
+            <td>이순신</td>
+            <td>반가워</td>
+            <td>2019-02-01</td>
+        </tr>
+        <tr>
+            <td><button onclick="down(this)">↓</button><button onclick="up(this)">↑</button></td>
+            <td>3</td>
+            <td>이순신</td>
+            <td>반가워</td>
+            <td>2019-02-01</td>
+        </tr>
+        <tr>
+            <td><button onclick="down(this)">↓</button><button onclick="up(this)">↑</button></td>
+            <td>4</td>
+            <td>이순신</td>
+            <td>반가워</td>
+            <td>2019-02-01</td>
+        </tr>
+        <tr>
+            <td><button onclick="down(this)">↓</button><button onclick="up(this)">↑</button></td>
+            <td>5</td>
+            <td>이순신</td>
+            <td>반가워</td>
+            <td>2019-02-01</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <script>
+        //down 함수
+        function down(x) { //down 함수 생성, this 받을 매개변수 x
+            // console.log(x); //x는 자기 자신을 나타내는 태그
+            // console.dir(x); //태그에서 어떤 것을 사용할 수 있는지 나타냄
+
+            // console.log( x.parentNode ); //부모태그(공백이 있다면, 공백을 선택)
+            // console.log( x.parentElement ); //부모태그(순수한 태그의 형태만 선택) / 태그(x).parentElement
+
+            // console.log(x.parentElement.nextElementSibling); //id의 다음 형제 td = 번호
+            // console.log(x.parentElement.nextElementSibling.nextElementSibling); //번호의 다음 형제 td = 이름
+            // console.log(x.previousElementSibling); //버튼 기준으로 이전 형제 = null(없음)
+
+            // console.log(x.parentElement.parentElement); //tr
+            // console.log(x.parentElement.parentElement.firstElementChild); //tr의 firstElementChild = 첫번째 자식태그 = 첫번째 td = 버튼
+            // console.log(x.parentElement.parentElement.lastElementChild); //tr의 lastElementChild = 마지막 자식태그 = 마지막 td = 날짜
+
+            // console.log(x.parentElement.parentElement.children); //배열!!!!!!!!!!!!!!! tr의 해당 자식들 = td 다섯개
+            // console.log(x.parentElement.parentElement.children[2]); //index 번호로 선택 가능, 자식들 중 3번째 = 이름
+
+            var current = x.parentElement.parentElement; //버튼의 부모행 = tr, 누른행
+            //tr의 다음 이웃 = 다음행
+            var next = current.nextElementSibling; //tr의 다음행
+        
+            //insertBefore은 동작시킬 태그의 부모태그를 얻어옵니다.
+            var table = document.querySelector(".table"); //appendChild 할때도 부모를 얻어왔음
+          
+            if(next == null) {
+                alert("마지막 행 입니다");
+                return; //함수 종료
+            }
+
+            table.insertBefore(next, current); //current 앞에 next를 넣는다.
+        }
+
+
+        //up 함수
+        function up(y) {
+            var current = y.parentElement.parentElement;
+            var pre = current.previousElementSibling;
+
+            var table = document.querySelector(".table");
+
+            if(pre == null) {
+                alert("첫번째 행 입니다");
+                return; //함수 종료
+            }
+
+            table.insertBefore(current, pre); //pre 앞에 current를 넣는다.
+        }
+    </script>
+
+</body>
+</html>

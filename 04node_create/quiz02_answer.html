@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        
+    </style>
+
+</head>
+<body>
+    
+    <h3>할일 목록 만들기</h3>
+    
+    <button class="allDel">전체삭제하기</button>
+    <div>
+        <h3 class="todoTitle" style="display:none;"></h3> <!-- button 누르면 생김, style로 숨겨놓음 ▶ 나중에 나타나게 할 것임 -->
+        <input type="text" class="todoName" placeholder="이름을 입력하세요">
+        <button type="button" class="todoBtn">확인</button>
+
+        <br>
+        <input type="text" class="todo" placeholder="할일">
+        <button type="button" class="addBtn">추가</button>
+        <ul class="todoList">
+
+        </ul>
+    </div>
+
+    <script>
+        var todoTitle = document.querySelector(".todoTitle");
+        var todoName = document.querySelector(".todoName");
+        var todoBtn = document.querySelector(".todoBtn");
+
+        // 이름
+        todoBtn.onclick = function() {
+            if(todoName.value == "") {
+                alert("이름을 입력하시오~~");
+                return;
+            }
+            todoTitle.innerHTML = todoName.value + "님 안녕하세요";
+            todoName.style.display = "none";
+            todoBtn.style.display = "none";
+            todoTitle.style.display = "block";
+        } 
+
+        // 할일
+        var todo = document.querySelector(".todo");
+        var todoList = document.querySelector(".todoList");
+        var addBtn = document.querySelector(".addBtn");
+
+        addBtn.onclick = function() {
+            var li = document.createElement("li"); //li태그 생성
+
+            if(todo.value == "") {
+                alert("할 일을 입력하시오~~");
+                return;
+            }
+
+            li.innerHTML = todo.value;
+            todo.value = "" //입력값 초기화
+        
+            //btn ▶ 인라인 ok, 익명함수 ok, addEventListener ok
+            var btn = document.createElement("button");
+            btn.innerHTML = "더블클릭삭제";
+            btn.ondblclick = remove;
+            li.appendChild(btn);
+            
+            var btn2 = document.createElement("button");
+            btn2.innerHTML = "▲";
+            btn2.onclick = up;
+            li.appendChild(btn2);
+            
+            var btn3 = document.createElement("button");
+            btn3.innerHTML = "▼";
+            btn3.addEventListener("click", down);
+            li.appendChild(btn3);
+
+            todoList.appendChild(li); //최종적으로 모든 li를 todoList에 넣음
+        }
+
+        function remove() {
+            //삭제
+            // console.log(this); 버튼 들어오는 것 확인
+            this.parentElement.remove();
+        }
+
+        function up() {
+            console.log(this); //버튼
+            var current = this.parentElement;
+            var pre = current.previousElementSibling;
+
+            console.log(current); //현재 li
+            console.log(pre); //이전 li
+
+            if(pre == null) {
+                alert("첫번째 행 입니다");
+                return; //함수 종료
+            }
+
+            if(confirm("위.로 이동하시겠습니까?????")) {
+                todoList.insertBefore(current, pre); //pre 앞에 current를 넣음
+            }
+        }
+
+        function down() {
+            var current = this.parentElement;
+            var next = current.nextElementSibling;
+
+            if(next == null) {
+                alert("마지막 행 입니다");
+                return; //함수 종료
+            }
+
+            if(confirm("아.래.로 이동하시겠습니까?????")) {
+                todoList.insertBefore(next, current); //current 앞에 next를 넣음
+            }
+        }
+
+        // 전체삭제
+        var allDel = document.querySelector(".allDel"); //버튼
+        // 여기에서 li를 받아오면 아무것도 없음
+
+        allDel.onclick = function() {
+            //이 당시(리스트가 들어있는 상황)의 li를 받아옴 / 클릭시에 태그를 얻음
+            var li = document.querySelectorAll(".todoList li");
+            console.log(li);
+
+            if(confirm("정말 삭제 하시겠습니까?") == false) {
+                return;
+            }
+
+            for(var i = 0; i < li.length; i++) {
+                li[i].remove();
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        
+    </style>
+
+</head>
+<body>
+    
+    <h3>step1</h3>
+    <p>input은 지우는게 아니라 display를 제어하세요</p>
+    <h3>할일 목록 만들기</h3>
+    
+    <button class="allDel">전체삭제하기</button>
+
+    <div>
+        <h3 class="msg"></h3> <!-- button 누르면 생김 -->
+        <input type="text" class="user" placeholder="이름을 입력하세요">
+        <button id="btn1">확인</button>
+    </div>
+
+    <div>
+    <input type="text" class="todo" placeholder="당신의 할일을 적으세요">
+    <button id="btn2">확인</button>
+    <ul class="list">
+        <!--
+            <li>내용</li>
+            <li>내용</li>
+            <li>내용</li>
+            <li>내용</li>
+            <li>내용</li>
+            이런식으로 생성될 것임
+        -->
+    </ul>
+    </div>
+
+    <script>
+        var btn1 = document.getElementById("btn1");
+        var user = document.querySelector(".user");
+        var msg = document.querySelector(".msg");
+
+        btn1.onclick = function() {
+            if(user.value == "") {
+                alert("이름을 입력하시오~~");
+                return;
+            }
+            msg.innerHTML = user.value + "님 안녕하세요";
+            user.style.display = "none";
+            btn1.style.display = "none";
+        } 
+
+        var btn2 = document.getElementById("btn2");
+        var todo = document.querySelector(".todo");
+        var list = document.querySelector(".list");
+
+        btn2.onclick = function () {
+            var li = document.createElement("li"); //li태그 생성
+            var remove = document.createElement("button"); //버튼 태그 생성
+
+            if(todo.value == "") {
+                alert("할 일을 입력하시오~~");
+                return;
+            }
+
+            var del = ' <button ondblclick="remove(this)">더블클릭 삭제</button>';
+            var up = ' <button onclick="up(this)">▲</button>';
+            var down = ' <button onclick="down(this)">▼</button>';
+
+            li.innerHTML = todo.value + del + up + down;
+                                      //classs는 안되고, onclick 먹힘
+            list.appendChild(li); //최종적으로 list태그(ul)에 자식으로 li를 넣어줌
+            todo.value = "";
+        }
+
+        function remove(x) {
+            // console.log(x); //버튼이 들어옴
+            x.parentElement.remove();
+        }
+
+        function up(x) {
+            var current = x.parentElement;
+            var pre = current.previousElementSibling;
+
+            // console.log(current);
+            // console.log(pre);
+            var list = document.querySelector(".list");
+
+            if(pre == null) {
+                alert("첫번째 행 입니다");
+                return; //함수 종료
+            }
+
+            list.insertBefore(current, pre); //pre 앞에 current 넣음
+        }
+
+        function down(x) {
+            var current = x.parentElement;
+            var next = current.nextElementSibling;
+
+            var list = document.querySelector(".list");
+
+            if(next == null) {
+                alert("마지막 행 입니다");
+                return; //함수 종료
+            }
+
+            list.insertBefore(next, current); //current 앞에 next를 넣음
+        }
+
+        // 전체삭제
+
+        var allDel = document.querySelector(".allDel"); //버튼
+        
+        allDel.onclick = function() {
+            //li 받아옴
+            var li = document.querySelectorAll(".list li");
+            console.log(li);
+
+            if(confirm("정말 삭제 하시겠습니까?") == false) {
+                return;
+            }
+
+            for(var i = 0; i < li.length; i++) {
+                li[i].remove();
+            }
+        }
+
+    </script>
+
+</body>
+</html>
