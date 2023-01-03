@@ -18,21 +18,26 @@
             <option value="3.jpg">가을</option>
             <option value="4.jpg">겨울</option>
         </select>
-
         <button class="btn" type="button">이미지 바꾸기</button>
 
-        <input type="color">
+        <input type="color" class="input">
         <button class="btn2">색상변경하기</button>
 
     </article>
 
     <script>
-        var mainimg = document.querySelector("img"); //이미지
-        var img = document.querySelector("select"); //옵션
-        var btn = document.querySelector(".btn"); //버튼
-        
+        var img = document.querySelector("img"); //이미지
+        var opt = document.querySelector("select"); //옵션
+        var btn = document.querySelector(".btn"); //이미지 변경 버튼
         btn.onclick = function() {
-            console.log("img.value");
+            console.log(opt.value);
+            img.src = "img/" + opt.value;
+        }
+
+        var input = document.querySelector(".input");
+        var btn2 = document.querySelector(".btn2"); //색상 변경 버튼
+        btn2.onclick = function() {
+            img.style.border = "3px solid " + input.value;
         }
     </script>
 

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+
+</head>
+<body>
+    
+    <section id="section">
+        <div class="list">
+            <div>
+                <span>홍길동</span>
+                <button type="button" class="btn sel">선택</button>
+                <button type="button" class="btn del">삭제</button>
+                <button type="button" class="btn aaa">aaa</button>
+            </div>
+            <div>
+                <span>김길동</span>
+                <button type="button" class="btn sel">선택</button>
+                <button type="button" class="btn del">삭제</button>
+                <button type="button" class="btn aaa">aaa</button>
+            </div>
+            <div>
+                <span>홍길자</span>
+                <button type="button" class="btn sel">선택</button>
+                <button type="button" class="btn del">삭제</button>
+                <button type="button" class="btn aaa">aaa</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        var list = document.querySelector(".list");
+        list.onclick = function () {
+            
+            if(event.target.tagName != "BUTTON") return; //버튼이 아니라면 종료
+            // console.log(event.target.className); //버튼의 className
+            // console.log(event.target.classList); //버튼의 class 이름 list
+
+            var arr = event.target.classList;
+            // 각각의 버튼의 동작이 다르기 때문에 class 속성 이용
+            if(arr.contains("sel")) {//선택버튼
+                event.target.previousElementSibling.style.color = "blue";
+
+            } else if(arr.contains("del")) { //삭제버튼
+                event.target.parentElement.remove();
+
+            } else if(arr.contains("aaa")) { //aaa버튼
+
+            }
+
+        }
+        
+    </script>
+
+</body>
+</html>

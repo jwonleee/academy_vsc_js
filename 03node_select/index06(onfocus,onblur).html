@@ -46,7 +46,7 @@
         var idmsg = document.querySelector(".idmsg");
         var pwmsg = document.querySelector(".pwmsg");
 
-        id.onblur = function () { //포커스가 나갈때 (onchange와 비교)
+        id.onchange = function () { //포커스가 나갈때 (onchange와 비교)
             if(id.value.length < 4) {
                 idmsg.innerHTML = "아이디 4글자 이상이거든요?";
                 id.style.border = "3px solid red";
@@ -56,7 +56,7 @@
             }
         }
 
-        pw.onblur = function () {
+        pw.onchange = function () {
             if(pw.value.length < 9) {
                 pwmsg.innerHTML = "비밀번호 9글자 이상이거든요?";
                 pw.style.border = "3px solid red";

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h3>여러 이벤트를 한번에 걸어주기</h3>
+    
+    <ul>
+        <li class="item">1.일인자</li>
+        <li class="item">2.이인자</li>
+        <li class="item">3.삼인자</li>
+        <li class="item">4.사인자</li>
+        <li class="item">5.오인자</li>
+    </ul>
+
+    선택한 태그의 값:
+    <p class="result"></p>
+
+
+    <!-- all로 li를 다 얻어서 반복문으로 하나씩 이벤틀 걸어주면 됨 -->
+    <script>
+        var result = document.querySelector(".result");
+
+        var item = document.querySelectorAll(".item"); //li 전부 얻어오기, 배열임
+
+        //이 방법은 비효율적인 방법 - 태그 100000개 이상이라면 ~??, 좋은 코드가 아님
+        for(var i = 0; i < item.length; i++) {
+
+            item[i].onclick = function() { //item의 i번째를 클릭하면~
+                result.innerHTML = this.innerHTML; //this 현재 클릭한 li의 innerHTML을 result.innerHTML에 넣어줌
+            }
+
+        }
+    </script>
+
+</body>
+</html>

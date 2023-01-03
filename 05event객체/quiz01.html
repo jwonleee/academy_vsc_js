@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        ul li {
+            display: inline-block;
+        }
+    </style>
+
+</head>
+
+<body>
+ 
+    <h3>이벤트객체활용</h3>
+    <div>
+        <ul class="parent"> <!-- 부모 태그에 class -->
+            <li><img src="img/1.jpg" alt="1" width="100"></li>
+            <li><img src="img/2.jpg" alt="1" width="100"></li>
+            <li><img src="img/3.jpg" alt="1" width="100"></li>
+            <li><img src="img/4.jpg" alt="1" width="100"></li>
+        </ul>
+        결과:
+        <div class="result">
+            <img src="img/1.jpg" alt="결과" width="300" >
+        </div>
+    </div>
+
+    <script>
+        var result = document.querySelector(".result > img"); //result-img의 scr속성을 변경해야 하기 때문에
+
+        var parent = document.querySelector(".parent");
+        parent.onclick = function() {
+            // console.log(event.target); //클릭한 li값, 현재 result값
+            // console.dir(event.target); //tagName 확인방법
+
+            if(event.target.tagName != "IMG") return; //li태그가 아니라면 종료
+            result.src = event.target.src; //클릭한 li의 scr를 result.src에 넣어줌
+        }
+    </script>
+
+
+</body>
+</html>

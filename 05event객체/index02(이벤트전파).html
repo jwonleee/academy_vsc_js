@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h3>이벤트 전파 특성 활용하기</h3>
+    
+    <ul class="parent">
+        <li>1.일인자</li>
+        <li>2.이인자</li>
+        <li>3.삼인자</li>
+        <li>4.사인자</li>
+        <li>5.오인자</li>
+    </ul>
+
+    선택한 태그의 값:
+    <p class="result"></p>
+
+    <script>
+        var result = document.querySelector(".result");
+
+        //부모에 이벤트를 걸면 자식한테 이벤트가 전파됨
+        var parent = document.querySelector(".parent"); //ul
+        parent.onclick = function(e) {
+            // console.log(this); //this는 ul
+            // result.innerHTML = this.innerHTML; //1~5까지 한번에 다 들어옴
+
+            // 이벤트 객체 - 이벤트 함수에 첫번째 매개변수로 자동 전달 됨
+            // console.log(e); //1. 매개변수로 받거나
+            // console.log(event); //2. 직접 event 객체를 넣거나
+
+            // console.log(event.target); //이벤트가 동작된 실제 태그
+            // console.log(event.currentTarget); //실제 이벤트가 걸려있는 태그
+
+            // e.target //li태그
+
+            // console.dir(e.target); //tagName 확인방법
+            if(e.target.tagName != "LI") return; //li태그가 아니라면 종료
+            result.innerHTML = e.target.innerHTML;
+        }
+    </script>
+
+</body>
+</html>

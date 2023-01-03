@@ -55,9 +55,8 @@
         var todoList = document.querySelector(".todoList");
 
         addList.onclick = function () {
-            
+            var tr = document.createElement("tr"); //tr만듦
             for (var i = 1; i <= 4; i++) {
-                var tr = document.createElement("tr"); //tr만듦
                 var td = document.createElement("td"); //td만듦
                 var input = document.createElement("input"); //input만듦
                 tr.appendChild(td);
