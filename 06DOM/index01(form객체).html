@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="list.board" name="actionForm">
+        <h3>가입창</h3>
+        이름: <input type="text" name="name"><br>
+        번호: <input type="text" name="phone" onblur="phoneFunc(event)"><br> <!-- 포커스가 아웃될 때 사용 onblur -->
+        분야:
+        <input type="checkbox" name="check">CSS
+        <input type="checkbox" name="check">JS
+        <input type="checkbox" name="check">HTML
+
+        <input type="submit" value="submit">
+    </form>
+
+    <script>
+
+        /* 
+        1. form태그는 document의 자식이라서 form의 name으로 접근이 가능
+        2. input은 form의 자식이라서 document.폼명.태그name으로 접근이 가능
+         */
+
+        // console.log(document.actionForm); //form 태그를 바로 얻어옴
+        // console.log(document.actionForm.name); //하위 input의 name도 이름으로 접근 가능
+        // console.log(document.actionForm.phone);
+
+        var submit = document.actionForm.querySelector("input[type='submit']") //input 태그의 타입 submit 인것
+        submit.onclick = function() {
+
+            event.preventDefault(); //submit의 고유이벤트 제거, 제거안하면 바로 넘어가버림
+            
+            if(document.actionForm.name.value.length <= 0) { //document.actionForm.name = name이 name인 input을 가리킴
+                alert("이름은 필수입니다");
+                document.actionForm.name.focus(); //포커싱을 name으로 가게끔 해줌
+                return; //함수 종료 (필수), return 안하면 아래의 코드를 실행함
+
+            } else if(document.actionForm.phone.value.length != 11) { //phone번호가 11개가 아니라면
+                alert("번호는 - 없이 11글자로 입력하세요");
+                document.actionForm.phone.focus();
+                return;
+
+            } else { //체크박스
+                var cnt = 0;
+                // var check = document.querySelectorAll("input[name='check']"); //배열로 얻어옴
+                var check = document.actionForm.check; //배열로 나옴
+                console.log(check);
+                for(var i = 0; i < check.length; i++) {
+                    if(check[i].checked == false) { //checked 가 falser이면
+                        cnt++;
+                    }
+                }
+
+                if(cnt == 0) {
+                    alert("적어도 하나의 분야를 선택하세요");
+                    return; //함수 종료(필수), return 안하면 아래의 코드를 실행함
+                }
+            }
+
+            document.actionForm.submit(); //폼.submit();
+
+        }
+
+        function phoneFunc(e) {
+            e.target.value = e.target.value.replaceAll("-", ""); //대상의 value값을 얻어서 replaceAll로 하이픈을 없애서 다시 value값에 넣어줌
+        }
+
+    </script>
+
+
+</body>
+</html>

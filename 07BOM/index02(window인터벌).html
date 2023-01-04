@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button class="stop">멈춰</button><!-- 멈추는 버튼 만들기 -->
+
+    <script>
+        
+        var id = window.setInterval(function() { //중지하기 위해서 실행되는 함수는 변수에 담음
+            console.log('실행됨');
+        }, 1000 ); //(실행시킬 함수, 인터벌); 여기서는 1000밀리세컨즈
+
+
+        //인터벌 중지
+        var stop = document.querySelector(".stop"); //버튼을 가져와서
+
+        stop.onclick = function() { //버튼을 클릭하면
+            window.clearInterval(id); //인터벌이 중지하게 만듦 (실행되는 인터벌을 중지해야 하기 때문에 담아진 변수를 넣어줌)
+        }
+
+    </script>
+
+</body>
+</html>

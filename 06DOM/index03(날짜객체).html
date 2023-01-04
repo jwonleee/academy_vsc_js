@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        //월은 0부터 시작 (0~11)
+        var date = new Date(2023, 0, 4); //23년, 1월, 4일
+        var date = new Date(2023, 0, 4, 14, 22, 0); //년월일 시, 분, 초
+        var date = new Date(); //현재시간
+        console.log(date);
+
+        //날짜의 형식이 다른 것, 날짜의 포멧형식 변환 함수
+        console.log(date.toUTCString()); //Wed, 04 Jan 2023 05:22:00 GMT
+        console.log(date.toLocaleDateString()); //2023. 1. 4.
+        console.log(date.toISOString()); //timestamp형: 2023-01-04T05:22:00.000Z
+
+        //년 월 일을 얻는 getter
+        var milis = date.getTime();
+        console.log(milis); //1997.1.1 ~ 현재까지 지난 시간을 밀리초로 표현
+
+        var year = date.getFullYear(); //년
+        var month = date.getMonth() + 1; //월
+        var day = date.getDate(); //일
+        var week = date.getDay(); //요일 - 숫자로 나옴(월요일부터 1~7)
+
+        console.log(year);
+        console.log(month);
+        console.log(day);
+        console.log(week); //수요일 3
+
+        var hour = date.getHours(); //시간
+        var minute = date.getMinutes(); //분
+        var sec = date.getSeconds(); //초
+
+        console.log(year + "년" + month + "월" + day + "일 " + hour + ":" + minute + ":" + sec);
+
+    </script>
+
+
+</body>
+</html>

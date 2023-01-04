@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {padding: 0; margin: 0;}
+        .bgImg {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            } to {
+                opacity: 1;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    
+    <h3>애니메이션이 주기적으로 동작하려면 태그가 변경되야 합니다.</h3>
+
+    <div class="slide">
+        <img src="img/slide1.jpg" class="bgImg">
+    </div>
+
+    <!-- 애니메이션 적용 안되는 풀이 -->
+    <!-- 애니메이션은 작동될 때 실행되는데 src만 바뀌면 class는 그대로라 애니메이션 작동하지 않음-->
+    <script>
+        var slide = document.querySelector(".slide img");
+        // console.log(slide); //<img src 나옴>
+        
+        var count = 1; //전역변수로 이미지 숫자를 설정해 줌
+        window.setInterval(function() { //인터벌 안에서 돌리기
+
+            slide.src="img/slide" + count + ".jpg"; //img태그의 src를 count로 분리해서 img 변수에 넣기
+
+            console.log(slide.src); //첫번째 img 나옴
+            
+            count++; //하나 띄우면 count 증가 = 1 ▶ 2 ▶ 3 ▶ 4 ...
+
+            if(count > 4) { //if 조건문으로 4 넘어가면 다시 count = 1 로 만들어줌
+                count = 1;
+            }
+
+        }, 2000); //2초에 한번씩 바꿔줌
+    </script>
+
+
+        <!-- 다른 풀이 1 -->
+        <!-- <script>
+            var slide = document.querySelector(".slide"); //div 나옴
+            
+            var count = 1; //jpg 바꿔줄 전역변수 설정
+            var chage = window.setInterval(function() { //2초마다 이미지 바꾸기
+
+                var img = document.createElement("img"); //img 태그를 만듦
+                img.src = "img/slide" + count + ".jpg";  //img 태그에 scr 속성을 만들어 줌(count 사용)
+                img.classList.add("bgImg"); //클래스 추가해서 style 넣어줌
+
+                console.log(img);
+
+                slide.firstElementChild.remove(); //현재 slide에 있는 img 태그 삭제
+
+                slide.appendChild(img); //만든 img 태그를 slide에 넣어줌
+                count++; //숫자 증가
+                if(count == 5) { count= 1;} //숫자가 5가 되면 count를 1로 만들어줌
+
+            }, 2000);
+        </script> -->
+
+
+        <!-- 다른 풀이 2 -->
+        <!-- <script>
+            var count = 1; //시작은 1부터
+            var arr = ['img/slide1.jpg', 'img/slide2.jpg', 'img/slide3.jpg', 'img/slide4.jpg'];
+
+            setInterval(function() {
+
+                var img = document.createElement("img"); //img 태그 생성
+                img.src = arr[count++]; //img의 src 속성에 배열값 넣음
+                img.classList.add("bgImg"); //img의 classList에 class="bgImg" 넣음
+                console.log(img); //돌아가는 거 확인
+
+                //remove
+                var slide = document.querySelector(".slide"); //slide 가져와서
+                slide.firstElementChild.remove(); //들어가 있는 첫번째 img 태그 지워줌
+
+                //append
+                slide.appendChild(img);
+
+                if(count == arr.length) count = 0;
+            }, 2000);
+        </script> -->
+</body>
+</html>

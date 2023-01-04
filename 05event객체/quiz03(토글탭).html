@@ -17,7 +17,21 @@
         }
 
         .toggle-menu {display: none;}
-        .active { display: block; } /* active가 옮겨지면서 내용이 보여지고, 안보여짐 */
+        .active { display: block; animation: fadeIn 1s ease-in-out;} /* active가 옮겨지면서 내용이 보여지고, 안보여짐 */
+
+        /* 애니메이션 라이브러리 사이트: https://michalsnik.github.io/aos/, https://whirl.netlify.app/ */
+        /* 애니메이션 */
+        @keyframes fadeIn {
+            from { /* from에서 to로 바꾸겠다 */
+                opacity: 0;
+                background-color: aquamarine;
+                margin-left: -100px;
+            } to {
+                opacity: 1;
+                background-color: beige;
+                margin-left: 0;
+            }
+        }
     </style>
 
 </head>
@@ -52,17 +66,17 @@
     </section>
 
     <script>
-        var toggle = document.querySelector(".toggle"); //ul 가져옴
+        var toggle = document.querySelector(".toggle"); //ul 가져옴, 부모태그 가져옴
         var menu = document.querySelector(".menu"); //토글메뉴 3개 다 나옴
 
-        
-        
         toggle.onclick = function() {
             var active = document.querySelector(".active");
-            var click = document.querySelector(event.target.dataset.id);
+            var click = document.querySelector(event.target.dataset.id); //누른 버튼의 id가져와서 변수에 담음
             
             // console.log(event.target); //target은 각각의 li임
             // console.log(event.target.dataset.id); //각각의 data-id 나옴
+
+            if(event.target.tagName != "LI") return; //li일때만 동작하게끔
 
             console.log(active);
             active.classList.remove("active");
@@ -70,10 +84,20 @@
             console.log(click);
             click.classList.add("active");
 
-            
-        }
+            //if 아래 다른 풀이
+            var trigger = event.target.dataset.id;
+            var tag = document.querySelector(trigger); //id를 가지고 있는 태그
 
+            //다른 태그는 active 삭제, 반복문으로 돌려서 삭제
+            var menu = document.querySelectorAll(".toggle-menu");
+            for(var i = 0; i < menu.length; i++) {
+                menu[i].classList.remove("active");
+            }
+
+            tag.classList.add("active"); //active 추가
+        }
     </script>
+
     
 </body>
 </html>
