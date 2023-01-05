@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h3>1번 페이지에서 만든 🍪 사용할거야</h3>
+
+    <input type="text" id="findCookie">
+    <button id="btn">찾을 🍪</button>
+
+    <script>
+        console.log(document.cookie)
+
+        var findCookie = document.getElementById("findCookie"); //찾을 쿠키를 가져옴
+
+        var btn = document.getElementById("btn"); //btn 가져옴
+        btn.onclick = function() {
+
+            //사용자가 입력한 값
+            var find = findCookie.value;
+
+            var arr = document.cookie.split("; ");
+            //console.log(arr); //;기준 split으로 쪼개서 배열에 담아주기
+
+            //반복을 이용해서 쿠키를 찾음
+            for(i in arr) { //i는 인덱스
+                // console.log(arr[i]); //arr[i]는 값
+
+                if(arr[i].indexOf(find) != -1) { //입력한 값이 있다면
+                    console.log('🍪있음');
+
+                    var value = arr[i].replaceAll(" ", "").replace(find+"=", "") //replaceAll-공백제거, replace로 사용가자 입력한 값 a= 을 공백으로 바꿔주면 값만 남음
+                    console.log("키:" + find);
+                    console.log("값:" + value);
+                }
+            }
+
+
+
+        }
+
+
+
+    </script>
+
+
+
+
+</body>
+</html>

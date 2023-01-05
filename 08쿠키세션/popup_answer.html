@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- js파일을 위에서 쓰고 싶으면 인라인이벤트 사용하고, js파일에서 함수 사용 -->
+    <!-- 쿠키 js -->
+    <script src="popup_answer.js"></script>
+    
+</head>
+<body>
+    
+    <!-- 쿠키가 살아있으면 팝업창이 안 나옴 -->
+    <h3>팝업창</h3>
+
+    <div>
+        내용
+    </div>
+    
+    오늘 하루 이 창을 다시 열지 않음<input type="checkbox" onclick="popupClose()">
+    
+    <script>
+        function popupClose() {
+            //쿠키생성
+            createCookie(); //호출
+            window.close(); //팝업창 종료
+        }
+    </script>
+
+
+</body>
+</html>

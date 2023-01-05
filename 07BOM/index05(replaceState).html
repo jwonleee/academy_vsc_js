@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h3>index05 페이지</h3>
+    1번 페이지<br><br>
+
+    <button onclick="location.href = 'index06.html'">index06 페이지 이동</button>
+
+
+    <h3>리플레이스 스테이트</h3>
+    <button onclick="func()">기록 변경하기</button>
+
+    <script>
+        function func() {
+            // history.pushState(null, '', '변경.html');
+            //현재에서 브라우저에 기록을 하나 추가 05 ▶ 변경 ▶ 06, 이동하는 게x
+            //뒤로가기 하면 06 ▶ 변경 ▶ 05
+
+            history.replaceState('', '', null); //05를 안바뀜
+        }
+
+        //기록을 변경해서 사용할 데이터를 '' 바꿔주면, 사용자가 뒤로가기 버튼을 누른 
+        //history.state 속성으로 확인이 가능함
+        if(history.state == '') { //사용자가 뒤로 가기를 눌렀구나를 감지
+            alert("기록이 변경되었습니다.");
+        }
+
+    </script>
+
+</body>
+</html>

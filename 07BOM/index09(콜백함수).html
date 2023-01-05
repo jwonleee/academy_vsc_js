@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h3>콜백함수 - 함수의 매개변수로 함수를 반환시켜줌</h3>
+
+    <script>
+        //콜백 - 호출하면 다시 거기다가 내가 결과를 돌려줄게
+
+        function geolocation(success, fail) { //너는 함수 콜만해주면 내가 대신 실행시켜서 결과를 줄게!!!
+            //처리, 몇초가 걸리지? 시간이 얼마나 걸릴지 몰라서 이것을 사용
+            //지금까지는 바로 실행되었음
+
+            setTimeout(function() { //5초 있다가 success 함수 실행시켜줘!!!!!!!
+                
+                //성공
+                success("결과"); //대신실행
+
+            }, 5000);
+
+        }
+
+        // geolocation(function () {
+        //     console.log(result); //결과가 5초 뒤에 돌아옴
+        // }, function() {
+        // });
+
+        geolocation(success, fail);
+
+        function success(result) {
+            console.log(result); //실행되는데 5초가 걸리고, 성공시에 결과=result를 콘솔에 띄움
+        }
+
+        function fail(result) {
+
+        }
+    </script>
+
+</body>
+</html>
