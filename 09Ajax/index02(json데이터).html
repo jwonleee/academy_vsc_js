@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button onclick="ajax()">json파일 ajax 요청</button>
+
+    <div class="result"></div> <!-- 이미 화면 로드 되어 있음, ajax 함수가 아래에 있음 -->
+    
+    <script>
+        function ajax() {
+            fetch("hi.json")
+            .then(function(response) {
+                return response.json(); //json 형변환, reponse안의 데이터를 json으로 변환 = JSON.parse();
+            }).then(function(data) {
+                console.log(data);
+                console.log(data.id); //json.키값 - ok
+                console.log(data["id"]); //json["키값"] - ok
+                
+                var result = document.querySelector(".result"); //화면에 id 키값 나타내기
+                result.innerHTML = data["id"];
+            })
+        }
+    </script>
+
+    <button onclick="ajax2()">xml데이터 ajax 요청</button>
+
+    <script>
+        function ajax2() {
+
+            fetch("hi.xml")
+            .then(function(res) {
+                return res.text();
+            })
+            .then(function(data) {
+
+                var result = new DOMParser().parseFromString(data, "text/xml");
+                console.log(result.querySelector("datas")); //datas 한번에 가져오기
+
+                var arr = result.querySelectorAll("datas > data"); //data 배열로 가져와서
+                console.log(arr);
+                for(var i = 0; i < arr.length; i++) { //반복문 돌려서 인덱스 하나씩 뽑기
+                    console.log(arr[i].querySelector("name").innerHTML); //name 원자값 가져오기
+                    console.log(arr[i].querySelector("version").innerHTML); //version 원자값 가져오기
+                    console.log(arr[i].querySelector("price").innerHTML); //price 원자값 가져오기
+                }
+
+            })
+        }
+    </script>
+
+
+
+
+
+</body>
+</html>

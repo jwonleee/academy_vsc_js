@@ -21,7 +21,7 @@
                 
                 //성공
                 success("결과"); //대신실행
-
+                fail("실패")
             }, 5000);
 
         }
@@ -31,15 +31,16 @@
         // }, function() {
         // });
 
-        geolocation(success, fail);
-
         function success(result) {
             console.log(result); //실행되는데 5초가 걸리고, 성공시에 결과=result를 콘솔에 띄움
         }
-
+        
         function fail(result) {
-
+            console.log(result);
         }
+        
+        geolocation(success, fail); //함수 실행
+
     </script>
 
 </body>

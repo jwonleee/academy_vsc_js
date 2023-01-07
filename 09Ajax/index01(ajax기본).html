@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button onclick="ajax()">Ajax 요청</button>
+
+    <script>
+        /* 
+            비동기 - 웹페이지 이동 없이 데이터만 주고받는 기술
+            fetch()를 호출하면 Promise를 반환
+
+            Promise
+            - pending : 수행중
+            - fullfiled : 성공
+            - reject : 실패
+
+            1. 리턴 Promise라면 then(콜백함수) 로 결과를 받을 수 있음
+        */
+
+        function ajax() {
+
+            //1st
+          /*   
+                var result = fetch("hi.txt"); //Promise 객체
+                console.log(result); //Promise 객체 확인
+                // function(response) {} - 콜백함수(익명함수), 매개변수로 함수를 넣어줌
+                result.then(function(res) {
+                    console.log(res);
+                }) 
+            */
+
+            //2nd - 한번에 쓰기
+            /* 
+                fetch("hi.txt")
+                .then(function(response) {
+
+                    if(response.status != 200) {
+                        alert("통신에 에러가 발생했습니다.");
+                        return; //함수 종료
+                    }
+                    // var a = response.text(); 
+                    // console.log(a); //a는 Promise 객체 나옴
+                    response.text()
+                    .then(function(data) {
+                        console.log(data); //이거 비동기야~ text 내용 나옴, 화면 로딩없이 데이터만 동적으로 가져옴
+                    })
+                }) 
+            */
+
+           //3rd - 콜백에 리턴을 걸면 fetch가 다시 Promise를 반환
+         /*   
+            fetch("hi.txt").then(function(res) {
+                    
+                    //callback 함수의 return으로 
+                    return res.text(); //res.text()의 결과가 다시 fetch로 돌아감 ▶ Promise 객체 나옴
+
+                }).then(function(data) { //여기서 data 찍음
+                    console.log(data);
+                })
+            */
+
+            //4nd - 비동기방식에는 순서를 보장하지 않음👀
+            /* ex) log2의 데이터를 가지고 log3에서 함수를 만들면 진행되지 않음
+               3번이 먼저 실행되는데 2번이 있을지 알 수 없음
+               1 ▶ 3 ▶ 2 나옴 */
+            
+            console.log(1);
+
+            fetch("hi.txt")
+
+            .then(function(response) {
+                return response.text();
+            })
+            .then(function(data) {
+                console.log(2);
+            })
+            console.log(3);
+
+        }
+
+
+        /* 
+            3rd
+            res, response 받고 그 안에 text()있음
+            return res.text() 하면 결과가 Promise 객체가 나옴 = fetch("hi.txt")하면서 
+            .then하면 콜백함수의 매개변수(=data)로 hi.txt가 들어가면서 return hi.txt가 나옴
+
+            text() - 데이터를 문자열로 변환
+        */
+
+/*         function myfetch(req) { 
+            //비동기적 실행.. 10초..
+            return new Promise(function(succes, fail) {
+                succes("대신실행")
+            }) 
+        }
+
+        var result = myfetch('aaaa');
+        result.then(function(res) {
+            console.log(res);
+        });
+
+        new Promise(function(succes, fail) {
+                succes("대신실행");
+                // throw new Error("dffs")
+        }).then(function(data) { //success
+            console.log(data);
+        }).catch(function(err) { //error
+            console.log(err);
+        }) */
+ 
+    </script>
+
+</body>
+</html>
