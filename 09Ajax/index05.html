@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,30 +10,127 @@
     <!-- 카카오 SDK 로드 -->
     <script src="js/kakao.min.js"></script>
 </head>
+
 <body>
 
     <a id="kakao-login-btn" href="javascript:loginWithKakao()">
-        <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
-          alt="카카오 로그인 버튼" />
+        <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222" alt="카카오 로그인 버튼" />
     </a>
 
 
     <script>
         // 5c76a17e720be7869f54b922421d1c3e
-        
+
         //1. 카카오 SDK 초기화
         Kakao.init('5c76a17e720be7869f54b922421d1c3e');
         console.log(Kakao.isInitialized());
 
 
-        //2.
+        //2. 카카오로그인 화면 띄우기
+        //로그인 성공시 페이지 이동 5번
         function loginWithKakao() {
             Kakao.Auth.authorize({
-            redirectUri: 'http://127.0.0.1:5501/09Ajax/index05.html',
+                redirectUri: 'http://127.0.0.1:5501/09Ajax/index05.html',
             });
         }
 
-    </script>
+        //3. 인가코드 받아오기
+        var URLSearch = new URLSearchParams(location.search);
+        //console.log(URLSearch.get("code")); 인가코드값만 떼서 확인
+
+        if (URLSearch.get("code") != null) { //인가코드를 받았을 때 = 로그인을 했을 때, 로그인을 해야 인가코드를 주니까
+            ajax();
+        }
+
+        //4. 토큰발급 요청 (POST방식, form형식)
+        function ajax() {
+
+            /* 
+                //JSON형식의 POST 요청
+                var data = { //{}로 묶여서 객체임
+                    grant_type : "authorization_code",
+                    client_id : "fe1fc7ea1cb78cfda1e41f0835e6e806", //내 애플리케이션 앱키에 RESET API 키 있음
+                    redirect_uri : "http://127.0.0.1:5501/09Ajax/index05.html",
+                    code : URLSearch.get("code") //위에서 얻은 인가코드 값
+                }
     
+                fetch("https://kauth.kakao.com/oauth/token", {
+                    method : 'POST',
+                    headers : {
+                        'Content-Type' : 'application/json' //???
+                    },
+                    body : JSON.stringify(data) //get은 주소를 통해서 보내고, post는 문서 안에 정보를 넣어서 보냄
+                })
+                .then(function(res) {
+                    console.log(res);
+                })
+                */
+
+            //Form형식의 POST요청
+            //formData객체이용 or 문자열
+
+            var url = "http://127.0.0.1:5501/09Ajax/index05.html";
+            var data = "grant_type=authorization_code" +
+                "&client_id=fe1fc7ea1cb78cfda1e41f0835e6e806" +
+                "&redirect_uri=" + url +
+                "&code=" + URLSearch.get("code"); //문자열 이용
+
+            fetch("https://kauth.kakao.com/oauth/token", {
+                method: 'POST',
+                headers: {
+                    //사용자 정보 가져올 때는 Authorization: token을 headers에 넣어줘야 함(여기 아니고 새로운 fetch에 쓰는 것임)
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                },
+                body: data //어차피 문자열로 써줘야 해서 변환 필요x
+            })
+            .then(function (res) {
+                    return res.json();
+            })
+            .then(function (data) {
+                    console.log(data); //token 찍음
+                    //token 저장하는 방법 2개
+
+                    //1. sessionStorage or cookie
+                    sessionStorage.setItem("acceess", data.access_token); //sessionStorage로 저장, setItem("키",값);
+
+                    //2. 카카오 API함수
+                    Kakao.Auth.setAccessToken(data.access_token);
+
+                    //토큰을 발급받고 사용자정보 받아오기(5) 호출
+                    requestUserInfo();
+            })
+        }
+
+        //5. 사용자 정보 받아오기
+        function requestUserInfo() {
+            //zkzkdh API내장함수 호출 - 카카오에서 만들어서 SDK에 넣어놓은 내장함수
+            Kakao.API.request({
+                url: '/v2/user/me',
+            }) //여기까지가 Promise 객체
+            .then(function (response) {
+                console.log(response);
+                console.log(response.kakao_account.email); //사용자 이메일
+                console.log(response.kakao_account.profile.nickname); //사용자 닉네임
+                console.log(response.kakao_account.profile.profile_image_url); //사용자 프로필
+
+                //이 정보를 가지고, 우리 데이터베이스에서 조회 or 로그인 하는 작업으로 연결
+                //기능을 사용할 수 있는 상태가 된 거고, 실제로 로그인 작업은 우리 서버에서 다시 해줘야 함
+                //처리하는 페이지(index06)로...
+                sessionStorage.setItem( "info", JSON.stringify({id: response.kakao_account.email,
+                                                               nick: response.kakao_account.profile.nickname,
+                                                               profile_img: response.kakao_account.profile.profile_image_url})
+                                       );
+                location.href = "index06.html";
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        }
+
+    </script>
+
 </body>
+
 </html>
